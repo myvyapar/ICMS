@@ -135,26 +135,27 @@ export class SaleComponent implements OnInit {
     const firmData = this.getFirmHeader(invoiceData.firmId)
     invoiceData['firmName'] = firmData
     invoiceData['partyName'] = partyData
-    switch (invoiceData?.firmName?.isInvoiceTheme) {
-      case 1:
-        this.pdfgenService.generatePDF1Download(invoiceData)
-        break;
-      case 2:
-        // this.pdfgenService.generatePDF2Download(invoiceData)
-        break;
-      case 3:
-        // this.pdfgenService.generatePDF3Download(invoiceData)
-        break;
-      case 4:
-        // this.pdfgenService.generatePDF4Download(invoiceData)
-        break;
-      case 5:
-        // this.pdfgenService.generatePDF5Download(invoiceData)
-        break;
+    this.pdfgenService.generatePDF1Download(invoiceData)
+    // switch (invoiceData?.firmName?.isInvoiceTheme) {
+    //   case 1:
+    //     this.pdfgenService.generatePDF1Download(invoiceData)
+    //     break;
+    //   case 2:
+    //     // this.pdfgenService.generatePDF2Download(invoiceData)
+    //     break;
+    //   case 3:
+    //     // this.pdfgenService.generatePDF3Download(invoiceData)
+    //     break;
+    //   case 4:
+    //     // this.pdfgenService.generatePDF4Download(invoiceData)
+    //     break;
+    //   case 5:
+    //     // this.pdfgenService.generatePDF5Download(invoiceData)
+    //     break;
 
-      default:
-        break;
-    }
+    //   default:
+    //     break;
+    // }
     console.log("[{invoiceData3}]", invoiceData);
     
   }

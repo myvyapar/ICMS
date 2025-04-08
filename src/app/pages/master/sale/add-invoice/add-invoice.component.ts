@@ -100,7 +100,7 @@ export interface InvoiceData {
             hsnNumber: getInvoiceData.products[0].hsnNumber || 0,
             paymentDays:getInvoiceData.paymentDays || 30
           });
-        ['firm', 'party', 'product', 'priceUnit', 'hsnNumber', 'pieces', 'totalitem','cut'].forEach(control => {
+        ['firm', 'party', 'discount', 'product', 'priceUnit', 'hsnNumber', 'pieces', 'totalitem','cut'].forEach(control => {
           this.invoiceForm.controls[control].reset();
         })
       } 
@@ -364,7 +364,7 @@ export interface InvoiceData {
         if (res) {
           this.invoiceList = res.filter((id:any) => 
             id.userId === localStorage.getItem("userId") && 
-            id.accountYear === localStorage.getItem("accountYear") &&
+            // id.accountYear === localStorage.getItem("accountYear") &&
             id.firmId === firmId
           )     
           this.maxInvoiceNumber = this.invoiceList.length > 0 

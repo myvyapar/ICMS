@@ -90,7 +90,7 @@ export class FirmMasterComponent implements OnInit {
           bankIfsc: result.data.ifscCode,
           bankAccountNo: result.data.bankAccountNo,
           userId : localStorage.getItem("userId"),
-          isInvoiceTheme: result.data.isInvoiceTheme,
+          isInvoiceTheme: 1,
         }
         this.firebaseService.addFirm(payload).then((res) => {
           if (res) {
