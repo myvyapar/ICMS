@@ -40,27 +40,28 @@ export class PdfviewComponent  implements OnInit{
     private pdfgenService :PdfgenService
   ) {
     if (this.loaderService.getInvoiceData()) {
-      this.invoiceData = this.loaderService.getInvoiceData()
-      switch (this.loaderService.getInvoiceData().firmName.isInvoiceTheme) {
-        case 1:
-          this.generatePDF1(this.invoiceData)
-          break;
-        case 2:
-          // this.generatePDF2(this.loaderService.getInvoiceData())
-          break;
-        case 3:
-          // this.generatePDF3(this.loaderService.getInvoiceData())
-          break;
-        case 4:
-          // this.generatePDF4(this.loaderService.getInvoiceData())
-          break;
-        case 5:
-          // this.generatePDF5(this.loaderService.getInvoiceData())
-          break;
+      this.invoiceData = this.loaderService.getInvoiceData();
+      this.generatePDF1(this.invoiceData);
+      // switch (this.loaderService.getInvoiceData().firmName.isInvoiceTheme) {
+      //   case 1:
           
-        default:
-          break;
-      }
+      //     break;
+      //   case 2:
+      //     // this.generatePDF2(this.loaderService.getInvoiceData())
+      //     break;
+      //   case 3:
+      //     // this.generatePDF3(this.loaderService.getInvoiceData())
+      //     break;
+      //   case 4:
+      //     // this.generatePDF4(this.loaderService.getInvoiceData())
+      //     break;
+      //   case 5:
+      //     // this.generatePDF5(this.loaderService.getInvoiceData())
+      //     break;
+          
+      //   default:
+      //     break;
+      // }
     } else {
       this.router.navigate(['/master/addinvoice'])
     }  
@@ -1303,25 +1304,26 @@ export class PdfviewComponent  implements OnInit{
       this.invoiceData['partyName'] = partyData
       if (res) {
         this.openConfigSnackBar('record create successfully')
-        switch (this.loaderService.getInvoiceData().firmName.isInvoiceTheme) {
-          case 1:
-            this.pdfgenService.generatePDF1Download(this.invoiceData)
-            break;
-          case 2:
-            // this.pdfgenService.generatePDF2Download(this.invoiceData)
-            break;
-          case 3:
-            // this.pdfgenService.generatePDF3Download(this.invoiceData)
-            break;
-          case 4:
-            // this.pdfgenService.generatePDF4Download(this.invoiceData)
-            break;
-          case 5:
-            // this.pdfgenService.generatePDF5Download(this.invoiceData)
-            break;
-          default:
-            break;
-        }
+        this.pdfgenService.generatePDF1Download(this.invoiceData)
+        // switch (this.loaderService.getInvoiceData().firmName.isInvoiceTheme) {
+        //   case 1:
+        //     this.pdfgenService.generatePDF1Download(this.invoiceData)
+        //     break;
+        //   case 2:
+        //     // this.pdfgenService.generatePDF2Download(this.invoiceData)
+        //     break;
+        //   case 3:
+        //     // this.pdfgenService.generatePDF3Download(this.invoiceData)
+        //     break;
+        //   case 4:
+        //     // this.pdfgenService.generatePDF4Download(this.invoiceData)
+        //     break;
+        //   case 5:
+        //     // this.pdfgenService.generatePDF5Download(this.invoiceData)
+        //     break;
+        //   default:
+        //     break;
+        // }
         this.router.navigate(['/master/addinvoice'])
       }
     }, (error) => {
