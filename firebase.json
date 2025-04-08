@@ -4,6 +4,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
+    "site": "myvyapar",
     "public": "dist/gadicure",
     "ignore": [
       "firebase.json",
