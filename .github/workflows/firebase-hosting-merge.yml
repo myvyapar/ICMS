@@ -10,35 +10,11 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          node-version: '18' # Updated node version for better compatibility (or you can try '16', '20', etc.)
-
-      - name: Install dependencies
-        run: |
-          npm install --force
-          npm list --depth=0 # List installed dependencies to confirm everything is installed correctly.
-
-      - name: Install Angular CLI
-        run: npm install -g @angular/cli
-
-      - name: Build Angular project
-        run: |
-          ng build --verbose  # Use --verbose to get more detailed build logs
-          
-      - name: Check if build was successful
-        run: |
-          if [ ! -d "dist" ]; then
-            echo "Build directory not found. The build failed!";
-            exit 1;
-          fi
-          
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      - uses: actions/checkout@v4
+      - run: ng build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MYVYAPAR_C8267 }}
           channelId: live
           projectId: myvyapar-c8267
-          target: myvyapar
