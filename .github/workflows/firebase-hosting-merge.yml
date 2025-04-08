@@ -13,17 +13,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          node-version: '16' # Use the node version specified in your project
+          node-version: '18' # Updated node version for better compatibility (or you can try '16', '20', etc.)
 
       - name: Install dependencies
-        run: npm install --force
+        run: |
+          npm install --force
+          npm list --depth=0 # List installed dependencies to confirm everything is installed correctly.
 
       - name: Install Angular CLI
         run: npm install -g @angular/cli
 
       - name: Build Angular project
-        run: ng build
-
+        run: |
+          ng build --verbose  # Use --verbose to get more detailed build logs
+          
+      - name: Check if build was successful
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "Build directory not found. The build failed!";
+            exit 1;
+          fi
+          
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
