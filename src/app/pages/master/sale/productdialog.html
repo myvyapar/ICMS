@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>{{'productdialog.ProductList' | translate}}</h2>
+<mat-card class="cardWithShadow">
+    <mat-card-content class="p-24">
+      <div class="table-responsive">
+        <table mat-table [dataSource]="productDataSource" class="mat-table">
+          
+          <!-- PO Number Column -->
+          <ng-container matColumnDef="hsnNumber">
+            <th mat-header-cell *matHeaderCellDef>{{'productdialog.HSNNo' | translate}}</th>
+            <td mat-cell *matCellDef="let element"> {{element.hsnNumber}} </td>
+          </ng-container>
+
+          <!-- Product Name Column -->
+          <ng-container matColumnDef="productName">
+            <th mat-header-cell *matHeaderCellDef>{{'productdialog.ProductName' | translate}}</th>
+            <td mat-cell *matCellDef="let element"> {{element.productName.productName}} </td>
+          </ng-container>
+
+            <!-- Price Column -->
+            <ng-container matColumnDef="pieces">
+              <th mat-header-cell *matHeaderCellDef>{{'productdialog.Pieces' | translate}}</th>
+              <td mat-cell *matCellDef="let element"> {{element.pieces | number:'1.2-2'}} </td>
+            </ng-container>
+
+          <!-- Defective Item Column -->
+          <ng-container matColumnDef="cut">
+            <th mat-header-cell *matHeaderCellDef>{{'productdialog.Cut' | translate}}</th>
+            <td mat-cell *matCellDef="let element"> {{element.cut}} </td>
+          </ng-container>
+      
+            <!-- Quantity Column -->
+            <ng-container matColumnDef="qty">
+              <th mat-header-cell *matHeaderCellDef>{{'productdialog.Quantity' | translate}}</th>
+              <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
+            </ng-container>
+
+            <!--  Column -->
+            <ng-container matColumnDef="priceUnit">
+              <th mat-header-cell *matHeaderCellDef>{{'productdialog.Price/Unit' | translate}}</th>
+              <td mat-cell *matCellDef="let element"> {{element.priceUnit}} </td>
+            </ng-container>
+
+            <!-- Final Amount Column -->
+            <ng-container matColumnDef="finalAmount">
+              <th mat-header-cell *matHeaderCellDef>{{'productdialog.FinalAmount' | translate}}</th>
+              <td mat-cell *matCellDef="let element"> {{element.finalAmount | number:'1.2-2'}} </td>
+            </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        </div>
+    </mat-card-content>
+</mat-card>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>{{'productdialog.Cancel' | translate}}</button>
+</mat-dialog-actions>
