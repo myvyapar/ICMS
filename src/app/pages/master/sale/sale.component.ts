@@ -43,7 +43,8 @@ export class SaleComponent implements OnInit {
     private dialog: MatDialog,
     private firebaseService: FirebaseService,
     private loaderService: LoaderService,
-    private pdfgenService: PdfgenService
+    private pdfgenService: PdfgenService,
+    private _snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -104,6 +105,24 @@ export class SaleComponent implements OnInit {
 
   addInvoice() {
     this.router.navigate(['/master/addinvoice']);
+  }
+
+  deleteInvoice(action: string, obj: any) {
+    this.firebaseService.deleteInvoice(obj.id).then((res: any) => {
+      this.getInvoiceList()
+      this.openConfigSnackBar('Record deleted successfully')
+    }, (error) => {
+      console.log("error => ", error);
+      this.openConfigSnackBar('Error deleting record')
+    })
+  }
+
+  openConfigSnackBar(snackbarTitle: any) {
+    this._snackBar.open(snackbarTitle, 'Splash', {
+      duration: 2 * 1000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
   }
 
   invoiceSorting() {
