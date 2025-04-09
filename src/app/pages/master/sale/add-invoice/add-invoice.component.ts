@@ -101,7 +101,11 @@ export interface InvoiceData {
             paymentDays:getInvoiceData.paymentDays || 30
           });
         ['firm', 'party', 'discount', 'product', 'priceUnit', 'hsnNumber', 'pieces', 'totalitem','cut'].forEach(control => {
-          this.invoiceForm.controls[control].reset();
+          if (control === 'discount') {
+            this.invoiceForm.controls[control].setValue(0);
+          } else {
+            this.invoiceForm.controls[control].reset();
+          }
         })
       } 
       this.invoiceForm.get('pieces')?.valueChanges.subscribe(() => this.calculateTotalItem());
