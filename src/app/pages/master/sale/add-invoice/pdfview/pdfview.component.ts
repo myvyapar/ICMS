@@ -65,8 +65,6 @@ export class PdfviewComponent  implements OnInit{
     } else {
       this.router.navigate(['/master/addinvoice'])
     }  
-    console.log("{{this.invoiceData}}",this.invoiceData);
-    
   }
 
   ngOnInit(): void {
@@ -241,7 +239,7 @@ export class PdfviewComponent  implements OnInit{
       doc.line((box2XPosition - 25) + textWidth + 2, lineYPosition, (box2XPosition - 25) + box2Width, lineYPosition);
     });
 
-    const columns = ["Sr", "Product", "HSN No", "Pieces", "Cut", "Quantity", "Pricce/Unit", "Amount"];
+    const columns = ["Sr", "Product", "Ch No", "HSN No", "Pieces", "Cut", "Quantity", "Pricce/Unit", "Amount"];
     const data: any = invoiceData.products;
     data.forEach((ele: any) => { ele.total = Number(ele.qty) * Number(ele.price) })
     const body: any = [];
@@ -249,6 +247,7 @@ export class PdfviewComponent  implements OnInit{
       const bodyRows = [
         i + 1, 
         data[i]?.productName?.productName ? data[i]?.productName?.productName : '',
+        data[i]?.chalanNo ? data[i]?.chalanNo.toString() : '',
         data[i]?.hsnNumber ? data[i]?.hsnNumber.toString() : '',
         data[i]?.pieces ? data[i]?.pieces.toString() : '',
         data[i]?.cut ? Number(data[i]?.cut).toFixed(2).toString() : '',
@@ -275,10 +274,10 @@ export class PdfviewComponent  implements OnInit{
     const formattedRoundedAmount = new Intl.NumberFormat('en-IN').format(roundedAmount);
     const finalAmountInWords = this.toWords.convert(Number(roundedAmount));
     body.push(
-      ['', '', '', '', '', '', { content: 'Gross Total', styles: { halign: 'left' } }, `Rs. ${formattedAmount}`],
-      ['', '', '', '', '', '', { content: `Discount ${invoiceData.discount}%`, styles: { halign: 'left' } }, `Rs. ${discountAmountFormatted}`],
-      ['', '', '', '', '', '', { content: `CGST ${invoiceData.cGST}%` }, `Rs. ${cGstAmountFormatted}`],
-      [{ content: `${finalAmountInWords}`, rowSpan: 3, colSpan: 6, styles: { halign: 'center', fontStyle: 'bold' } }, `SGST ${invoiceData.sGST}%`, `Rs. ${sGstAmountFormatted}`],
+      ['', '', '', '', '', '','', { content: 'Gross Total', styles: { halign: 'left' } }, `Rs. ${formattedAmount}`],
+      ['', '', '', '', '', '','', { content: `Discount ${invoiceData.discount}%`, styles: { halign: 'left' } }, `Rs. ${discountAmountFormatted}`],
+      ['', '', '', '', '', '','', { content: `CGST ${invoiceData.cGST}%` }, `Rs. ${cGstAmountFormatted}`],
+      [{ content: `${finalAmountInWords}`, rowSpan: 3, colSpan: 7, styles: { halign: 'center', fontStyle: 'bold' } }, `SGST ${invoiceData.sGST}%`, `Rs. ${sGstAmountFormatted}`],
       [{ content: 'Total Amount' }, `Rs. ${Amount}`, { styles: { FontFace: 'left' } }],
       [{ content: 'Final Amount' }, `Rs. ${formattedRoundedAmount}.00`, { styles: { FontFace: 'left' } }],
     );
