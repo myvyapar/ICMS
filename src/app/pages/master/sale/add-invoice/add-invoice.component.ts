@@ -28,6 +28,7 @@ export interface InvoiceData {
   priceUnit: number;
   finalAmount: number;
   hsnNumber: number;
+  chalanNo: number;
   // finalAmount: number;
 
   }
@@ -46,6 +47,7 @@ export interface InvoiceData {
       'firm',
       'Party',
       'hsnNumber',
+      'chalanNo',
       'product',
       'TotalItem',
       'Price',
@@ -94,13 +96,14 @@ export interface InvoiceData {
             date: new Date(getInvoiceData.date) || new Date(),
             totalitem: getInvoiceData.products[0].qty || 0,
             cut: getInvoiceData.products[0].cut || 0,
-            priceUnit: getInvoiceData.products[0].priceUnit || 0,
+            priceUnit: getInvoiceData.products[0].priceUnit || '',
             pieces: getInvoiceData.products[0].pieces || 0,
             product: getInvoiceData.products[0].productName || '',
-            hsnNumber: getInvoiceData.products[0].hsnNumber || 0,
+            hsnNumber: getInvoiceData.products[0].hsnNumber || '',
+            chalanNo:getInvoiceData.products[0].chalanNo ||'',
             paymentDays:getInvoiceData.paymentDays || 30
           });
-        ['firm', 'party', 'discount', 'product', 'priceUnit', 'hsnNumber', 'pieces', 'totalitem','cut'].forEach(control => {
+        ['firm', 'party', 'discount', 'product', 'priceUnit','chalanNo', 'hsnNumber', 'pieces', 'totalitem','cut'].forEach(control => {
           if (control === 'discount') {
             this.invoiceForm.controls[control].setValue(0);
           } else {
@@ -133,10 +136,11 @@ export interface InvoiceData {
         date: [new Date()],
         totalitem: ['', [Validators.required,Validators.min(0)]],
         cut: ['', [Validators.required,Validators.min(0)]],
-        priceUnit: [0, [Validators.required,Validators.min(0)]],
+        priceUnit: ['', [Validators.required,Validators.min(0)]],
         pieces: ['',[Validators.required,Validators.min(0)]],
         product: ['', Validators.required],
         hsnNumber: ['', [Validators.required, Validators.min(0)]],
+        chalanNo: ['', [Validators.required, Validators.min(0)]],
         paymentDays: [30]
       })
       this.paymentDaysChange(30)
@@ -154,7 +158,7 @@ export interface InvoiceData {
         addtoData.date = moment(this.invoiceForm.value.date).format('L');
         this.data.push(addtoData);
         this.addinvoiceDataSource.data = [...this.data];
-        ['product', 'priceUnit', 'hsnNumber', 'pieces', 'totalitem','cut'].forEach(control => {
+        ['product', 'priceUnit', 'hsnNumber','chalanNo', 'pieces', 'totalitem','cut'].forEach(control => {
           this.invoiceForm.controls[control].reset();
         })
         this.editMode = false;
@@ -189,7 +193,8 @@ export interface InvoiceData {
         product: element.product,
         priceUnit: element.priceUnit,
         pieces: element.pieces,
-        hsnNumber: element.hsnNumber
+        hsnNumber: element.hsnNumber,
+        chalanNo: element.chalanNo
       });
       this.data = this.data.filter(item => item.id !== element.id);
       this.addinvoiceDataSource.data = [...this.data];
@@ -206,6 +211,7 @@ export interface InvoiceData {
         this.invoiceForm.controls['product'].reset()
         this.invoiceForm.controls['priceUnit'].reset()
         this.invoiceForm.controls['hsnNumber'].reset()
+        this.invoiceForm.controls['chalanNo'].reset()
         this.invoiceForm.controls['pieces'].reset()
         this.invoiceForm.controls['totalitem'].reset()
         this.invoiceForm.controls['cut'].reset()
@@ -345,6 +351,7 @@ export interface InvoiceData {
           cut: item.cut,
           priceUnit: item.priceUnit,
           hsnNumber: item.hsnNumber,
+          chalanNo: item.chalanNo,
           finalAmount: item.finalAmount
         };
 
@@ -503,6 +510,7 @@ export interface InvoiceData {
         const bodyRows = invoiceData.products.map((product: any, index: any) => [
           index + 1,
           product.hsnNumber,
+          product.chalanNo,
           product.productName.productName,
           product.qty,
           product.priceUnit,

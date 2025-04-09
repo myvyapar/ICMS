@@ -4,6 +4,12 @@
       <div class="table-responsive">
         <table mat-table [dataSource]="productDataSource" class="mat-table">
           
+          <!-- Ch Number Column -->
+          <ng-container matColumnDef="chalanNo">
+            <th mat-header-cell *matHeaderCellDef>{{'productdialog.ChalanNo' | translate}}</th>
+            <td mat-cell *matCellDef="let element"> {{element.chalanNo}} </td>
+          </ng-container>
+
           <!-- PO Number Column -->
           <ng-container matColumnDef="hsnNumber">
             <th mat-header-cell *matHeaderCellDef>{{'productdialog.HSNNo' | translate}}</th>

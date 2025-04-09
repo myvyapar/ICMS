@@ -129,6 +129,7 @@
     "Next":"Next",
     "ProductEntry":"Product Entry",
     "HSNNumber":"HSN Number",
+    "ChalanNo":"Chalan No",
     "SelectProduct":"Select Product",
     "Pieces":"Pieces",
     "EnterPieces":"Enter Pieces",
@@ -143,6 +144,7 @@
     "FirmName":"Firm Name",
     "PartyName":"Party Name",
     "HSN":"HSN",
+    "Chalan":"Chalan No",
     "Product":"Product",
     "Price/Unit":"Price/Unit",
     "Amount":"Amount",
@@ -168,7 +170,9 @@
     "qtyisrequired":"Qty is required",
     "qtymustbeatleast0":"Qty must be at least 0",
     "Price/Unitisrequired":"Price/Unit is required",
-    "Price/Unitmustbeatleast0":"Price/Unit must be at least 0"
+    "Price/Unitmustbeatleast0":"Price/Unit must be at least 0",
+    "chalanNoisrequired": "Chalan No is required",
+    "chalanNomustbeatleast0": "Chalan No must be at least 0"
   },
   "productdialog":{
     "ProductList":"Product List",
@@ -177,6 +181,7 @@
     "FinalAmount":"Final Amount",
     "ProductName":"Product Name",
     "HSNNo":"HSNNo",
+    "ChalanNo":"ChalanNo",
     "Pieces":"Pieces",
     "Quantity":"Quantity",
     "Cancel":"Cancel"

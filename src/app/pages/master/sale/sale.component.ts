@@ -175,7 +175,6 @@ export class SaleComponent implements OnInit {
     //   default:
     //     break;
     // }
-    console.log("[{invoiceData3}]", invoiceData);
     
   }
 
@@ -217,7 +216,7 @@ export class SaleComponent implements OnInit {
 })
 
 export class productdialog implements OnInit {
-  displayedColumns: string[] = ['hsnNumber', 'productName', 'pieces', 'cut', 'qty','priceUnit', 'finalAmount'];
+  displayedColumns: string[] = ['chalanNo','hsnNumber', 'productName', 'pieces', 'cut', 'qty','priceUnit', 'finalAmount'];
   productDataSource: any = []
   constructor(
     public dialogRef: MatDialogRef<productdialog>,
